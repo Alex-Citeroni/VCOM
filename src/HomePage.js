@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, useCallback, useContext } from 'react';
-import { Link } from 'react-router-dom';
 import { LogContext } from './LogContext';
 import './App.css';
 import correctAudio from './media/correct_sound.mp3';
