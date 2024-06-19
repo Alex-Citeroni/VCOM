@@ -10,7 +10,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/VCOM" element={<HomePage />} />
-          <Route path="/pier" element={<LogsPage />} />
+          <Route path="/VCOM/pier" element={<LogsPage />} />
         </Routes>
       </Router>
     </LogProvider>
