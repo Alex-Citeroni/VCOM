@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/VCOM/static/css/main.23f1fa4a.css",
-    "main.js": "/VCOM/static/js/main.2fe27dec.js",
+    "main.js": "/VCOM/static/js/main.2e090564.js",
     "static/js/453.01138ce9.chunk.js": "/VCOM/static/js/453.01138ce9.chunk.js",
     "static/media/cockpit_hmi.jpg": "/VCOM/static/media/cockpit_hmi.50b0df3f68a5f028f53d.jpg",
     "static/media/doubt_sound.mp3": "/VCOM/static/media/doubt_sound.3db1c4bff84d686cc464.mp3",
@@ -9,11 +9,11 @@
     "static/media/wrong_sound.mp3": "/VCOM/static/media/wrong_sound.39144110624d68215330.mp3",
     "index.html": "/VCOM/index.html",
     "main.23f1fa4a.css.map": "/VCOM/static/css/main.23f1fa4a.css.map",
-    "main.2fe27dec.js.map": "/VCOM/static/js/main.2fe27dec.js.map",
+    "main.2e090564.js.map": "/VCOM/static/js/main.2e090564.js.map",
     "453.01138ce9.chunk.js.map": "/VCOM/static/js/453.01138ce9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.23f1fa4a.css",
-    "static/js/main.2fe27dec.js"
+    "static/js/main.2e090564.js"
   ]
 }
