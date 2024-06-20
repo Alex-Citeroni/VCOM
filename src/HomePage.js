@@ -102,7 +102,6 @@ function HomePage() {
     const wrongAudioRef = useRef(null);
     const doubtAudioRef = useRef(null);
     const [delay, setDelay] = useState(randomDelay());
-    const [lastMouseButton, setLastMouseButton] = useState(null);
     const [currentKey, setCurrentKey] = useState(null);
     const { setIsRPressed, logs, setLogs } = useContext(LogContext);
     const [phraseIndex, setPhraseIndex] = useState(0);
@@ -121,32 +120,32 @@ function HomePage() {
     }, [setIsRPressed, currentKey]);
 
     const handleKeyUp = useCallback((event) => {
-        
-            const releaseTime = Date.now();
-            const pressDuration = (releaseTime - rPressedTimeRef.current) / 1000;
 
-            setIsRPressed(false);
-            localStorage.setItem('isRPressed', false);
-            setCurrentKey(null);
+        const releaseTime = Date.now();
+        const pressDuration = (releaseTime - rPressedTimeRef.current) / 1000;
 
-            const formatDate = (date) => {
-                const hours = date.getHours().toString().padStart(2, '0');
-                const minutes = date.getMinutes().toString().padStart(2, '0');
-                const seconds = date.getSeconds().toString().padStart(2, '0');
-                const milliseconds = date.getMilliseconds().toString().padStart(3, '0');
-                return `${hours}:${minutes}:${seconds}.${milliseconds}`;
-            };
+        setIsRPressed(false);
+        localStorage.setItem('isRPressed', false);
+        setCurrentKey(null);
 
-            const pressedTime = new Date(rPressedTimeRef.current);
-            const releasedTime = new Date(releaseTime);
+        const formatDate = (date) => {
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            const seconds = date.getSeconds().toString().padStart(2, '0');
+            const milliseconds = date.getMilliseconds().toString().padStart(3, '0');
+            return `${hours}:${minutes}:${seconds}.${milliseconds}`;
+        };
 
-            const logEntry = `Date: ${pressedTime.toLocaleDateString()}, Key: ${event.key}, Pressed: ${formatDate(pressedTime)}, Released: ${formatDate(releasedTime)}, Duration: ${pressDuration.toFixed(2)} seconds, Delay: ${delay}ms\n`;
-            const newLogs = [...logs, logEntry];
-            setLogs(newLogs);
-            localStorage.setItem('logs', JSON.stringify(newLogs));
+        const pressedTime = new Date(rPressedTimeRef.current);
+        const releasedTime = new Date(releaseTime);
 
-            rPressedTimeRef.current = null;
-        
+        const logEntry = `Date: ${pressedTime.toLocaleDateString()}, Key: ${event.key}, Pressed: ${formatDate(pressedTime)}, Released: ${formatDate(releasedTime)}, Duration: ${pressDuration.toFixed(2)} seconds, Delay: ${delay}ms\n`;
+        const newLogs = [...logs, logEntry];
+        setLogs(newLogs);
+        localStorage.setItem('logs', JSON.stringify(newLogs));
+
+        rPressedTimeRef.current = null;
+
     }, [logs, setIsRPressed, setLogs, delay]);
 
     const handleMouseDown = useCallback((event) => {
@@ -154,7 +153,12 @@ function HomePage() {
             return;
         }
 
-        setLastMouseButton(event.button);
+        if (correct || doubt || wrong) {
+            setCorrect(false);
+            setDoubt(false);
+            setWrong(false);
+            return;
+        }
 
         if (event.button === 0) {
             setCorrect(false);
@@ -179,7 +183,7 @@ function HomePage() {
                 setWrong(randomResponse === "wrong");
             }, randomDelayTime);
         }
-    }, [phraseIndex]);
+    }, [phraseIndex, correct, doubt, wrong]);
 
 
     useEffect(() => {
@@ -217,7 +221,6 @@ function HomePage() {
                         <p>Non ho capito</p>
                     </div>
                 )}
-                
             </header>
             <div className="phrase-display">
                 <p>{phraseIndex < phrases.length ? phrases[phraseIndex] : "I COMANDI SONO FINITI"}</p>
